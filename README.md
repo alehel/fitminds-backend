@@ -33,6 +33,7 @@ Before code can be merged into develop, the following requirements must be met.
 
 ## API-endpoints
 All API endpoints are resource named and will return collections unless specific IDs are requested. For instance, a resource for data on users will be as follows.
+
 Endpoint | Descrtiption
 -------- | ------------
 /v1/users | Returns a collection of all registered users.
