@@ -1,0 +1,37 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "0.1.0",
+    "title": "fIT Minds API",
+    "description": "Backend for the fIT Minds project. A workplace training platform which uses Strava for data collection."
+  },
+  "servers": [
+    {
+      "url": "https://fitminds.run/api/v1"
+    }
+  ],
+  "paths": {
+    "/ping": {
+      "get": {
+        "description": "Verify the API is up, and for how long.",
+        "responses": {
+          "200": {
+            "description": "Successfully returned the uptime of the system reported in seconds.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "uptime": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
