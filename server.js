@@ -4,6 +4,13 @@ const app = express();
 
 const port = process.env.PORT || 1337;
 
-app.get('/v1/ping', api.pong);
+// set up swagger-ui
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./openapi.json');
+app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+// routes
+app.get('/api/v1/ping', api.pong);
+
+// start server
 app.listen(port, () => console.log(`Server listening on port ${port}`));
