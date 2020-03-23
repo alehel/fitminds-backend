@@ -42,7 +42,7 @@ Endpoint | Descrtiption
 
 All endpoints will contain a version. When breaking changes are made to an API endpoint, treat it as a new version. 
 
-All endpoints are to be documented using Swagger.
+All endpoints are to be documented using OpenAPI 3.0.
 
 ## Dependencies
 All new dependencies must be discussed before being merged into the develop branch. 
