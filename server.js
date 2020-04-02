@@ -5,8 +5,9 @@ const swaggerDocument = require('./openapi.json');
 
 const createServer = (port) => {
     const app = express();
-    app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    
     app.get('/v1/ping', api.pong);
+    app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     const server = app.listen(port, () => console.log(`Server listening on port ${port}`));
     return server;
 
