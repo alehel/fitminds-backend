@@ -6,7 +6,7 @@ The fIT Minds website will be a club website for employees of IT Minds.
 # Roadmap
 Version | Main Feature
 ------- | ------------
-0.1 | /ping endpoint which responds in json format. Swagger configured for use.
+0.1 | Set up API documentation and testing framework. Create /ping endpoint which responds in json format and has both documentation and tests.
 0.2 | /user endpoint which accepts a user id string and token, queries the Strava API for the specified user, and returns the data in json format.
 0.3 | Set up automatic deploy of backend. Commits to master trigger new deploy.
 0.4 | Set up logging.
@@ -22,6 +22,7 @@ There are three different branch naming rules.
 * New features are named *feature/name_of_new_feature*
 * Bugfixes are named *bugfix/short_bug_description*
 * Dependency update are named *dep/update_dependencies*
+* Anything that doesn't fit neatly into the above categories such as minor changes to readme are named *other/description*
 
 ## Merge Requirements
 Before code can be merged into develop, the following requirements must be met.
@@ -41,7 +42,7 @@ Endpoint | Descrtiption
 
 All endpoints will contain a version. When breaking changes are made to an API endpoint, treat it as a new version. 
 
-All endpoints are to be documented using Swagger.
+All endpoints are to be documented using OpenAPI 3.0.
 
 ## Dependencies
 All new dependencies must be discussed before being merged into the develop branch. 
