@@ -14,6 +14,7 @@ const createServer = (port) => {
 
 };
 
+//check if the module is being run by node (aka entry point of the program) or pulled in by require
 if(require.main === module) {
     const port = process.env.PORT || 1337;
     const server = createServer(port);
