@@ -9,7 +9,7 @@ let testResponse;
 
 before( async () => {
     server = createServer(port);
-    testResponse = await got("http://localhost:"+port+"/v1/ping"); 
+    testResponse = await got(`http://localhost:${port}/v1/ping`); 
 });
 
 after(() => {
