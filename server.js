@@ -2,11 +2,15 @@ const express = require('express');
 const api = require('./api');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./openapi.json');
+require('dotenv').config();
 
 const createServer = (port) => {
     const app = express();
     
     app.get('/v1/ping', api.pong);
+
+    app.get('/v1/user/:userId', api.getAthlete);
+
     app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     const server = app.listen(port, () => console.log(`Server listening on port ${port}`));
     return server;
