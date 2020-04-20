@@ -2,7 +2,7 @@ const cuid = require('cuid')
 const db = require('./db')
 
 const Athlete = db.model('Athlete', {
-    _id: { type: String, default: cuid },
+    
     athlete_id : Number,
     access_token: String,
     expiry: Number,
@@ -28,10 +28,20 @@ async function get (athleteId) {
     const athlete = await Athlete.findOne({athlete_id : athleteId});
     return athlete;
 }
+async function edit (athleteId, change) {
+    const athlete = await get(athleteId)
+    Object.keys(change).forEach(function (key) {
+        
+        athlete[key] = change[key]
+    })
+    await athlete.save()
+    return athlete;
+}
 
 module.exports = {
     create,
     list,
-    get
+    get,
+    edit
 }
 
