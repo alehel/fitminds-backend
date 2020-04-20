@@ -11,6 +11,8 @@ const createServer = (port) => {
 
     app.get('/v1/user/:userId', api.getAthlete);
 
+    app.get('/v1/authorization/:authorizationCode', api.authorize);
+
     app.use('/api/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     const server = app.listen(port, () => console.log(`Server listening on port ${port}`));
     return server;

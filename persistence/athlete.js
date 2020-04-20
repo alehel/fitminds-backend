@@ -1,4 +1,3 @@
-const cuid = require('cuid')
 const db = require('./db')
 
 const Athlete = db.model('Athlete', {
@@ -18,16 +17,17 @@ async function list (opts = {}) {
     const { offset = 0, limit = 25, tag } = opts
     const query = tag ? { tags: tag } : {}
     const athletes = await Athlete.find(query)
-    .sort({ _id: 1 })
+    .sort({ athlete_id: 1 })
     .skip(offset)
     .limit(limit)
     return athletes;
-}
+};
 
 async function get (athleteId) {
     const athlete = await Athlete.findOne({athlete_id : athleteId});
     return athlete;
-}
+};
+
 async function edit (athleteId, change) {
     const athlete = await get(athleteId)
     Object.keys(change).forEach(function (key) {
@@ -36,7 +36,7 @@ async function edit (athleteId, change) {
     })
     await athlete.save()
     return athlete;
-}
+};
 
 module.exports = {
     create,
