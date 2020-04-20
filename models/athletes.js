@@ -1,7 +1,7 @@
 const AthletePersistenceService = require("../persistence/athlete");
 const got = require('got');
 
- get = async (athleteId) => {
+get = async (athleteId) => {
     let athlete = await AthletePersistenceService.get(athleteId);
     let accessToken = athlete.access_token;
     if(athlete.expiry <= (Date.now() / 1000)) {
@@ -32,8 +32,26 @@ authorize = async authorizationCode => {
             grant_type: 'authorization_code',
             code: authorizationCode
         }
-    }).json(); 
-    console.log(authorizeResponse);
+    }).json();
+    let athlete = await AthletePersistenceService.get(authorizeResponse.athlete.id);
+
+    //if athlete does not exist in database prior to authorization create athlete
+    if(!athlete) {
+        athlete = await AthletePersistenceService.create({
+            athlete_id: authorizeResponse.athlete.id,
+            access_token: authorizeResponse.access_token,
+            expiry: authorizeResponse.expires_at,
+            refresh_token: authorizeResponse.refresh_token
+        });
+    }
+    //else update
+    else{
+        athlete = await AthletePersistenceService.edit(authorizeResponse.athlete.id, {
+                access_token: authorizeResponse.access_token,
+                expiry: authorizeResponse.expires_at,
+                refresh_token: authorizeResponse.refresh_token
+        });
+    }  
 }
 
 module.exports = {
