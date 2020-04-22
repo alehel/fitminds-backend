@@ -23,6 +23,21 @@ get = async (athleteId) => {
     return stravaAthlete;
 }
 
+list = async () => {
+    const dbAthletes = await AthletePersistenceService.list();
+    let athletes = [];
+    dbAthletes.forEach(athlete => {
+        athletes.push({
+            id: athlete.athlete_id,
+            username: athlete.athlete_username,
+            firstname: athlete.athlete_firstname,
+            surname: athlete.athlete_surname,
+            profile_pic_url: athlete.profile_pic_url
+        })
+    });
+    return athletes;
+}
+
 authorize = async authorizationCode => {
     const authorizeResponse = await got.post(`${process.env.STRAVA_BASE_URL}oauth/token`,
     {
@@ -39,9 +54,13 @@ authorize = async authorizationCode => {
     if(!athlete) {
         athlete = await AthletePersistenceService.create({
             athlete_id: authorizeResponse.athlete.id,
+            athlete_username: authorizeResponse.athlete.username,
+            athlete_firstname: authorizeResponse.athlete.firstname,
+            athlete_surname: authorizeResponse.athlete.lastname,
             access_token: authorizeResponse.access_token,
             expiry: authorizeResponse.expires_at,
-            refresh_token: authorizeResponse.refresh_token
+            refresh_token: authorizeResponse.refresh_token,
+            profile_pic_url: authorizeResponse.athlete.profile_medium
         });
     }
     //else update
@@ -56,5 +75,6 @@ authorize = async authorizationCode => {
 
 module.exports = {
     get,
+    list,
     authorize
 }

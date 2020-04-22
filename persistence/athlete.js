@@ -3,9 +3,13 @@ const db = require('./db')
 const Athlete = db.model('Athlete', {
     
     athlete_id : Number,
+    athlete_username: String,
+    athlete_firstname: String,
+    athlete_surname: String,
     access_token: String,
     expiry: Number,
-    refresh_token: String
+    refresh_token: String,
+    profile_pic_url: String
 });
 
 async function create (fields) {

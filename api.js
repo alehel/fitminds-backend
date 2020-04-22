@@ -4,6 +4,7 @@ const AthleteService = require('./models/athletes');
 module.exports = {
   pong, 
   getAthlete,
+  getAthletes,
   authorize
 };
 
@@ -13,8 +14,13 @@ async function pong(req, res) {
 }
 
 async function getAthlete(req, res) {
-  const user = await AthleteService.get(req.params.userId);
-  res.json({ user });
+  const athlete = await AthleteService.get(req.params.athleteId);
+  res.json({ athlete });
+}
+
+async function getAthletes(req, res) {
+  const athletes = await AthleteService.list();
+  res.json(athletes);
 }
 
 async function authorize(req, res) {

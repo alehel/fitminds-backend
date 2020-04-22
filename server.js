@@ -9,7 +9,9 @@ const createServer = (port) => {
     
     app.get('/v1/ping', api.pong);
 
-    app.get('/v1/user/:userId', api.getAthlete);
+    app.get('/v1/athlete', api.getAthletes);
+
+    app.get('/v1/athlete/:athleteId', api.getAthlete);
 
     app.get('/v1/authorization/:authorizationCode', api.authorize);
 
