@@ -2,11 +2,14 @@ const express = require('express');
 const api = require('./api');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./openapi.json');
+const cors = require('cors')
 require('dotenv').config();
 
 const createServer = (port) => {
     const app = express();
     
+    app.use(cors());
+
     app.get('/v1/ping', api.pong);
 
     app.get('/v1/athlete', api.getAthletes);
