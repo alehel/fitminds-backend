@@ -20,7 +20,7 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "got": "^10.6.0",
+    "got": "^11.8.5",
     "mocha": "^7.1.1",
     "express": "^4.17.1",
     "swagger-ui-express": "^4.1.3"
